@@ -46,5 +46,5 @@ export default function App() {
 }
 
 function Logo() {
-  return <h1>PACK MATE 📋</h1>;
+  return <h1>PACK MATE</h1>;
 }
