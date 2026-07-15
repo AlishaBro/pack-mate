@@ -27,7 +27,11 @@ export default function InputData({ onAdditems }) {
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3> what do you need for your trip?</h3>
+      <label htmlFor="quantity" className="sr-only">
+        Quantity
+      </label>
       <select
+        id="quantity"
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
         key={Date.now()}>
@@ -35,7 +39,11 @@ export default function InputData({ onAdditems }) {
           <option value={num}>{num}</option>
         ))}
       </select>
+      <label htmlFor="description" className="sr-only">
+        description
+      </label>
       <input
+        id="description"
         type="text"
         placeholder="Item.."
         value={description}

@@ -6,6 +6,7 @@ export default function List({
   onDeleteItem,
   onToggleItem,
   onClearItem,
+  onUpdateItem,
 }) {
   const [sortby, setsortby] = useState("order");
   let sortedItems;
@@ -34,6 +35,7 @@ export default function List({
             onDeleteItem={onDeleteItem}
             onToggleItem={onToggleItem}
             onClearItem={onClearItem}
+            onUpdateItem={onUpdateItem}
             key={item.id}
           />
         ))}

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputData from "./InputData";
 import List from "./List";
 import Stats from "./Stats";
 
 export default function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(() => {
+    const storedItems = localStorage.getItem("items");
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
   function handleAddItems(item) {
     setItems((items) => [...items, item]);
   }
@@ -18,8 +24,8 @@ export default function App() {
     console.log(id);
     setItems((items) =>
       items.map((item) =>
-        item.id === id ? { ...item, packed: !item.packed } : item
-      )
+        item.id === id ? { ...item, packed: !item.packed } : item,
+      ),
     );
   }
 
@@ -28,6 +34,12 @@ export default function App() {
     if (confirmed) {
       setItems([]);
     }
+  }
+
+  function handleUpdateItem(id, updates) {
+    setItems((items) =>
+      items.map((item) => (item.id === id ? { ...item, ...updates } : item)),
+    );
   }
   console.log(items);
   return (
@@ -39,6 +51,7 @@ export default function App() {
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
         onClearItem={handleClear}
+        onUpdateItem={handleUpdateItem}
       />
       <Stats items={items} />
     </div>
